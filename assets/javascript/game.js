@@ -9,17 +9,47 @@ var answerArray = [];
 for (var i = 0; i < computerChoice.length; i++){
 	answerArray[i] = "_";
 }
-document.getElementById("computerChoice").innerHTML = answerArray;
-document.getElementById("computerChoice").innerHTML = answerArray.join(" ");
 
+var remaningLetters = answerArray.length;
+
+var rGuess = 25;
+var loss;
+var wins;
+// document.onkeyup = function(event) {
+
+// var userGuess = event.key;
+
+function lettersGuessed (){
 document.onkeyup = function(event) {
 
-	var letterGuess = event.key;
-	document.getElementById("letterGuess").innerHTML = letterGuess;
-}		
+	var userGuess = event.key;
+		if (remaningLetters > 0){
+			for (var j = 0; j < computerChoice.length; j++){
+				if (computerChoice[j] === userGuess){
+					answerArray[j] = userGuess;
+					remaningLetters--;
+				}
+				else if (computerChoice[j] !== userGuess){
+					--rGuess;
+					document.getElementById("letterGuess").innerHTML = userGuess;	
+				}
+			}
+		}
+		else if (rGuess <= 25){
+			++loss;
+		}
+		else{
+			++wins;
+		}
+}
+}
 
-
-
+document.getElementById("wins").innerHTML = wins;
+document.getElementById("loss").innerHTML = loss;
+document.getElementById("rGuess").innerHTML = rGuess;
+document.getElementById("computerChoice").innerHTML = answerArray;
+document.getElementById("computerChoice").innerHTML = answerArray.join(" ");
+lettersGuessed();
 
 
 
