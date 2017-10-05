@@ -23,7 +23,7 @@ document.onkeyup = function(event) {
 // console.log("fire")	// var letterGuess = [];
 	var userGuess = event.key;
 	//console.log(userGuess);
-		if (remaningLetters > -1){
+		if (remaningLetters > -1 || rGuess === 0){
 			
 				if (computerChoice.indexOf(userGuess) !== -1){
 					for (var j = 0; j < computerChoice.length; j++){
