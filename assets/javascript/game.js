@@ -12,8 +12,8 @@ for (var i = 0; i < computerChoice.length; i++){
 var remaningLetters = answerArray.length;
 
 var rGuess = 25;
-var loss;
-var wins;
+var loss = 0;
+var wins = 0;
 // document.onkeyup = function(event) {
 
 // var userGuess = event.key;
@@ -23,29 +23,34 @@ document.onkeyup = function(event) {
 // console.log("fire")	// var letterGuess = [];
 	var userGuess = event.key;
 	//console.log(userGuess);
-		if (remaningLetters > 0){
-			for (var j = 0; j < computerChoice.length; j++){
-				if (computerChoice[j] === userGuess){
-					answerArray[j] = userGuess;
-					document.getElementById("computerChoice").innerHTML = answerArray;
-					document.getElementById("computerChoice").innerHTML = answerArray.join(" ");
-					remaningLetters--;
+		if (remaningLetters > -1){
+			
+				if (computerChoice.indexOf(userGuess) !== -1){
+					for (var j = 0; j < computerChoice.length; j++){
+						if(computerChoice[j] === userGuess){
+							answerArray[j] = userGuess;
+					    	document.getElementById("computerChoice").innerHTML = answerArray;
+							document.getElementById("computerChoice").innerHTML = answerArray.join(" ");
+						}
+						else{}
+					}
 				}
-				else if (computerChoice[j] !== userGuess){
+				else if(computerChoice.indexOf(userGuess) === -1){
 					letterGuess.push(userGuess);
 					document.getElementById("letterGuess").innerHTML = letterGuess;
-					--rGuess;
+					rGuess--;
+					document.getElementById("rGuess").innerHTML = rGuess;
 				}
-				else{
-					break;
-				}
-			}
+				else{}			
+				
 		}
 		else if (rGuess <= 25){
-			++loss;
+			loss++;
+			document.getElementById("loss").innerHTML = loss;
 		}
 		else{
-			++wins;
+			wins++;
+			document.getElementById("wins").innerHTML = wins;
 		}
 }
 }
@@ -53,7 +58,7 @@ lettersGuessed();
 // document.getElementById("userGuess").innerHTML = (letterGuess[j]);
 document.getElementById("wins").innerHTML = wins;
 document.getElementById("loss").innerHTML = loss;
-document.getElementById("rGuess").innerHTML = rGuess;
+// document.getElementById("rGuess").innerHTML = rGuess;
 // document.getElementById("computerChoice").innerHTML = answerArray;
 document.getElementById("computerChoice").innerHTML = answerArray.join(" ");
 // lettersGuessed();
